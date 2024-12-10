@@ -1,74 +1,60 @@
-let mm;
-// let mm2;
-let button;
+let mm; // 1번 노래
 
-let button2;
-let button3;
+let button; // 1번 플레이 버튼
 
-// let button4;
+let buttonPause; // 1번 pause
+let buttonJump; // 1번 jump <<
+let buttonJump2; // 1번 jump >>
 
-let buttonPause;
-
-let buttonJump;
-
-let vol;
-let slider;
-let sliderPan;
-let sliderRate;
-
+let vol; // 볼륨 변수 선언
 let jumpV;
-
 let amp;
 
+let slider; // 볼륨 슬라이드
+let sliderPan; // lr 슬라이드
+let sliderRate; // rae 슬라이드
+
+
 function preload(){
-  soundFormats('mp3', 'ogg');
+  soundFormats('mp3');
   mm = loadSound('m1.mp3');
-  // mm2 = loadSound('m2.mp3');
 }
 
 function setup() {
-  createCanvas(400, 500);
+  createCanvas(640, 640);
   
   amp = new p5.Amplitude();
   
   vol = 0.5;
-  // mm.play();
   
   button = createButton('PLAY');
-  buttonPause = createButton('PAUSE');
   button.mousePressed(playMusic);
   
+  buttonPause = createButton('PAUSE');
   buttonPause.mousePressed(pauseMusic);
   
-  buttonJump = createButton("<<");
+  buttonJump= createButton("<<");
   buttonJump.mousePressed(jumpSong2);
-  buttonJump = createButton(">>");
-  buttonJump.mousePressed(jumpSong);
   
-  // button2 = createButton('-');
-  // button2.mousePressed(minusVol);
-  // button3 = createButton('+');
-  // button3.mousePressed(plusVol);
+  buttonJump2 = createButton(">>");
+  buttonJump2.mousePressed(jumpSong);
+  
   slider = createSlider(0, 2, 0.5, 0.1);
   sliderPan = createSlider(-1, 1, 0, 0.1);
   sliderRate = createSlider(0, 2, 1, 0.1);
   
-  // button4 = createButton('PLAY2');
-  // button4.mousePressed(playMusic2);
+  jumpV = 0;
   
 }
 
 function draw() {
   background(100,100,200);
+  
   mm.setVolume(vol);
   vol = slider.value();
   mm.pan(sliderPan.value());
   mm.rate(sliderRate.value());
   console.log(amp.getLevel()*1000);
-  
-  fill(255,255,255);
-  ellipse(100,100,100,50);
-  ellipse(300,100,100,50);
   
   fill(0,0,0);
   ellipse(100+amp.getLevel()*100,100,25,25);
@@ -77,35 +63,18 @@ function draw() {
   fill(255,100,0);
   ellipse(200,300,amp.getLevel()*1000, amp.getLevel()*1000);
   
-  if(jumpV>173.424){
-    mm.stop();
-    button.html("PLAY");
-  }
-  // console.log(vol);
-  // console.log(mm.duration());
-  // mm2.setVolume(vol);
 }
 
+  
 function playMusic(){
   if(!mm.isPlaying()){
     mm.play();
     button.html('STOP');
   }else{
-    // mm.pause
     mm.stop();
     button.html('PLAY');
   }
 }
-
-// function playMusic2(){
-//   if(!mm2.isPlaying()){
-//     mm2.play();
-//     button4.html('STOP');
-//   }else{
-//     mm2.stop();
-//     button4.html('PLAY');
-//   }
-// }
 
 function minusVol(){
   vol = vol - 0.1;
@@ -117,31 +86,28 @@ function plusVol(){
 
 function pauseMusic(){
     if(!mm.isPlaying()){
-    // mm.play();
-    // button.html('STOP');
+    mm.play();
+    button.html('STOP');
   }else{
-    mm.pause
+    mm.pause();
     button.html('PLAY');
-    // mm.stop();
-    // button.html('PLAY');
+    mm.stop();
+    button.html('PLAY');
   }
 }
 
 function jumpSong(){
-  jumpV = jumpV + 17.3424;
+  jumpV = jumpV+17.3424;
   if(jumpV + 17.3424 >= 173.424){
-    jumpV = 173.423
+    jumpV = 173.423;
   }
   mm.jump(jumpV);
-  // var t = random(mm.duration());
-  // // mm.jump(t);
-  // mm.jump(32.5); // mm.duration():100 = 현위치:퍼센트
 }
 
 function jumpSong2(){
   jumpV = jumpV - 17.3424;
-  if(jumpV + 17.3424 <= 173.424){
-    jumpV = 173.423
+  if(jumpV <= 17.3424){
+    jumpV = 0;
   }
   mm.jump(jumpV);
 }
