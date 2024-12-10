@@ -15,7 +15,9 @@ let buttonJump4; // 2번 jump >>
 let vol; // 볼륨 변수 선언
 let vol2;
 
-let jumpV;
+let jumpV; // 점프 변수 선언
+let jumpV2;
+
 let amp;
 
 let slider; // 1번 볼륨 슬라이드
@@ -78,6 +80,7 @@ function setup() {
   sliderRate2 = createSlider(0, 2, 1, 0.1);
   
   jumpV = 0;
+  jumpV2 = 0;
   
 }
 
@@ -160,17 +163,17 @@ function jumpSong2(){
 }
 
 function jumpSong3(){ // 2번
-  jumpV = jumpV+17.3424;
-  if(jumpV + 17.3424 >= 173.424){
-    jumpV = 173.423;
+  jumpV2 = jumpV2+17.3424;
+  if(jumpV2 + 17.3424 >= 173.424){
+    jumpV2 = 173.423;
   }
-  mm2.jump(jumpV);
+  mm2.jump(jumpV2);
 }
 
 function jumpSong4(){
-  jumpV = jumpV - 17.3424;
-  if(jumpV <= 17.3424){
-    jumpV = 0;
+  jumpV2 = jumpV2 - 17.3424;
+  if(jumpV2 <= 17.3424){
+    jumpV2 = 0;
   }
-  mm2.jump(jumpV);
+  mm2.jump(jumpV2);
 }
