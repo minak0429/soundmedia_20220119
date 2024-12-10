@@ -21,8 +21,11 @@ function preload(){
 }
 
 function setup() {
+  img3 = loadImage("back.jpg");
   img = loadImage("i2.png");
   img2 = loadImage("i1.png");
+  img4 = loadImage("i3.png");
+  
   createCanvas(640, 640);
   
   
@@ -52,8 +55,7 @@ function setup() {
 
 function draw() {
   background(220);
-  image(img, 230, 50, 150, 200);
-  image(img2, 30, 120, 300, 200);
+  image(img3, 0, 0, 640, 640);
   
   mm.setVolume(vol);
   vol = slider.value();
@@ -61,11 +63,9 @@ function draw() {
   mm.rate(sliderRate.value());
   console.log(amp.getLevel()*1000);
   
-  // image = img(100+amp.getLevel()*100,100,25,25);
-  ellipse(300+amp.getLevel()*100,100,25,25);
-  
-//   fill(255,100,0);
-//   ellipse(200,300,amp.getLevel()*1000, amp.getLevel()*1000);
+  image(img, 290 + amp.getLevel() * 200, 65 + amp.getLevel() * 300, 100, 120);
+  image(img2, 30 + amp.getLevel() * 200, 120 + amp.getLevel() * 200, 300, 200);
+  image(img4, 450 - amp.getLevel() * 200, 400 - amp.getLevel() * 200, 150, 150);
   
 }
 
