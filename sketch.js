@@ -13,6 +13,8 @@ let buttonJump3; // 2번 jump <<
 let buttonJump4; // 2번 jump >>
 
 let vol; // 볼륨 변수 선언
+let vol2;
+
 let jumpV;
 let amp;
 
@@ -43,6 +45,7 @@ function setup() {
   amp = new p5.Amplitude();
   
   vol = 0.5;
+  vol2 = 0.5;
   
   button = createButton('PLAY'); // 1번
   button.mousePressed(playMusic);
@@ -88,8 +91,8 @@ function draw() {
   mm.rate(sliderRate.value());
   // console.log(amp.getLevel()*1000);
   
-  mm2.setVolume(vol); // 2번
-  vol = slider2.value();
+  mm2.setVolume(vol2); // 2번
+  vol2 = slider2.value();
   mm2.pan(sliderPan2.value());
   mm2.rate(sliderRate2.value());
   // console.log(amp.getLevel()*1000);
@@ -114,42 +117,29 @@ function playMusic(){ // 1번
 function playMusic2(){ // 2번
   if(!mm2.isPlaying()){
     mm2.play();
-    button.html('STOP');
+    button2.html('STOP');
   }else{
     mm2.stop();
-    button.html('PLAY');
+    button2.html('PLAY');
   }
 }
 
-function minusVol(){
-  vol = vol - 0.1;
-}
-
-function plusVol(){
-  vol = vol + 0.1;
-}
 
 function pauseMusic(){ // 1번
     if(!mm.isPlaying()){
-    mm.play();
-    button.html('STOP');
+      
   }else{
     mm.pause();
-    button.html('PLAY');
-    mm.stop();
     button.html('PLAY');
   }
 }
 
 function pauseMusic2(){ // 2번
     if(!mm2.isPlaying()){
-    mm2.play();
-    button.html('STOP');
+   
   }else{
     mm2.pause();
-    button.html('PLAY');
-    mm2.stop();
-    button.html('PLAY');
+    button2.html('PLAY');
   }
 }
 
@@ -169,7 +159,7 @@ function jumpSong2(){
   mm.jump(jumpV);
 }
 
-function jumpSong3(){ // 1번
+function jumpSong3(){ // 2번
   jumpV = jumpV+17.3424;
   if(jumpV + 17.3424 >= 173.424){
     jumpV = 173.423;
