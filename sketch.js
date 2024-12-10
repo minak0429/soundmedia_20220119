@@ -22,8 +22,8 @@ let amp;
 
 function preload(){
   soundFormats('mp3', 'ogg');
-  mm = loadSound('leest.mp3');
-  // mm2 = loadSound('svtlo.mp3');
+  mm = loadSound('m1.mp3');
+  // mm2 = loadSound('m2.mp3');
 }
 
 function setup() {
